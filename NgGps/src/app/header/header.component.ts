@@ -1,5 +1,5 @@
 import { HeaderUserInput } from './../shared/headerUserInput.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +10,9 @@ export class HeaderComponent implements OnInit {
 
   userInput = new HeaderUserInput();
 
+  @Output()
+  searchDataset = new EventEmitter<HeaderUserInput>();
+
   constructor() { }
 
   ngOnInit() {
@@ -18,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
   search() {
-    console.log(this.userInput);
+    this.searchDataset.emit(this.userInput);
   }
 
 }
