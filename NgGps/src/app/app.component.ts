@@ -1,3 +1,4 @@
+import { LocoGpsService } from './services/loco-gps/loco-gps.service';
 import { HeaderUserInput } from './shared/headerUserInput.model';
 import { Component } from '@angular/core';
 
@@ -9,7 +10,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
+  constructor(
+    private locoGpsService: LocoGpsService
+  ) {}
+
   onSearchDataset(userInput: HeaderUserInput) {
-    console.log(userInput);
+    this.locoGpsService.getLocoGpsData(userInput.trainId, userInput.subdivision);
   }
 }

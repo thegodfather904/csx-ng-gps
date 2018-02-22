@@ -1,3 +1,4 @@
+import { LocoGpsService } from './services/loco-gps/loco-gps.service';
 import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,7 +21,7 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [LocoGpsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
