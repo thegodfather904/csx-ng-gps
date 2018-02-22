@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
-  mainContentData: MainContent;
+  mainContentData = new MainContent();
 
   constructor(
     private locoGpsService: LocoGpsService,

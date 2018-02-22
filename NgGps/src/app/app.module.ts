@@ -10,13 +10,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainContentComponent } from './main-content/main-content.component';
+import { LocoGpsTableComponent } from './main-content/loco-gps-table/loco-gps-table.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    MainContentComponent
+    MainContentComponent,
+    LocoGpsTableComponent
   ],
   imports: [
     BrowserModule,
