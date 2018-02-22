@@ -15,6 +15,7 @@ export class AppComponent {
   ) {}
 
   onSearchDataset(userInput: HeaderUserInput) {
-    this.locoGpsService.getLocoGpsData(userInput.trainId, userInput.subdivision);
+    this.locoGpsService.getLocoGpsData(userInput.trainId, userInput.subdivision)
+    .then(results => console.log(results));
   }
 }
