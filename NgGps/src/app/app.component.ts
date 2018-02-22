@@ -1,3 +1,5 @@
+import { MainContent } from './shared/mainContent.model';
+import { MainContentService } from './services/main-content/main-content.service';
 import { LocoGpsService } from './services/loco-gps/loco-gps.service';
 import { HeaderUserInput } from './shared/headerUserInput.model';
 import { Component } from '@angular/core';
@@ -10,12 +12,16 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
+  mainContentData: MainContent;
+
   constructor(
-    private locoGpsService: LocoGpsService
+    private locoGpsService: LocoGpsService,
+    private mainContentService: MainContentService
   ) {}
 
   onSearchDataset(userInput: HeaderUserInput) {
     this.locoGpsService.getLocoGpsData(userInput.trainId, userInput.subdivision)
-    .then(results => console.log(results));
+    .then(results => this.mainContentService.buildMainContent(results))
+    .then(mainContent => this.mainContentData = mainContent);
   }
 }
