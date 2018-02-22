@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { LocoGpsTableComponent } from './main-content/loco-gps-table/loco-gps-table.component';
+import { LargeIconCardsComponent } from './main-content/large-icon-cards/large-icon-cards.component';
+import { LargeIconCardComponent } from './main-content/large-icon-cards/large-icon-card/large-icon-card.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { LocoGpsTableComponent } from './main-content/loco-gps-table/loco-gps-ta
     AppComponent,
     HeaderComponent,
     MainContentComponent,
-    LocoGpsTableComponent
+    LocoGpsTableComponent,
+    LargeIconCardsComponent,
+    LargeIconCardComponent
   ],
   imports: [
     BrowserModule,
