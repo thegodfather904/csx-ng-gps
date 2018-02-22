@@ -1,3 +1,4 @@
+import { GraphCardsComponent } from './main-content/graph-cards/graph-cards.component';
 import { MainContentService } from './services/main-content/main-content.service';
 import { LocoGpsService } from './services/loco-gps/loco-gps.service';
 import { MaterialModule } from './material/material.module';
@@ -22,7 +23,8 @@ import { LargeIconCardComponent } from './main-content/large-icon-cards/large-ic
     MainContentComponent,
     LocoGpsTableComponent,
     LargeIconCardsComponent,
-    LargeIconCardComponent
+    LargeIconCardComponent,
+    GraphCardsComponent
   ],
   imports: [
     BrowserModule,

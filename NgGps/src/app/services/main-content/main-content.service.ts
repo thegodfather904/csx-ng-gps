@@ -1,3 +1,5 @@
+import { SignalStrengthCard } from './../../shared/signalStrengthCard.model';
+import { AverageSpeedCard } from './../../shared/averageSpeedCard.model';
 import { LocoGpsIcons } from './../../shared/locoGpsIcons.model';
 import { LargeIconCardStyles } from './../../shared/largeIconCardStyles.model';
 import { LargeIconCard } from './../../shared/largeIconCard.model';
@@ -20,6 +22,15 @@ export class MainContentService {
       const uniqueSubs = [];
       const uniqueDevice = [];
 
+      // for avg speed card
+      let avgSpeed = 0;
+      const speedList = [];
+
+      // for signal strength
+      let lowSignalStrength = Number.MAX_SAFE_INTEGER;
+      let highSignalStrength = Number.MIN_SAFE_INTEGER;
+      const signalStrengthList = [];
+
       for (let i = 0; i < locoGpsData.length; i++) {
 
         if (uniqueTrains.indexOf(locoGpsData[i].train_i) === -1) {
@@ -34,7 +45,26 @@ export class MainContentService {
         if (uniqueDevice.indexOf(locoGpsData[i].device_i) === -1) {
          uniqueDevice.push(locoGpsData[i].device_i);
         }
+
+        // for average speed
+        avgSpeed += locoGpsData[i].loco_speed_m;
+        speedList.push(locoGpsData[i].loco_speed_m);
+
+        if (locoGpsData[i].signal_strength_m > highSignalStrength) {
+          highSignalStrength = locoGpsData[i].signal_strength_m;
+        } else if (locoGpsData[i].signal_strength_m < lowSignalStrength) {
+          lowSignalStrength = locoGpsData[i].signal_strength_m;
+        }
+
+        signalStrengthList.push(locoGpsData[i].signal_strength_m);
+
       }
+
+      mainContent.avgSpeedCard = this.buildAvgSpeedCard(avgSpeed, speedList, locoGpsData.length);
+
+      // signal strength card
+      mainContent.signalStrengthCard = this.buildSignalStrengthCard(lowSignalStrength,
+        highSignalStrength, signalStrengthList);
 
       const cardStyles = new LargeIconCardStyles();
       const cardIcons = new LocoGpsIcons();
@@ -60,6 +90,22 @@ export class MainContentService {
     largeIconCard.cardStyle = cardStyle;
     largeIconCard.cardImage = cardIcon;
     return largeIconCard;
+  }
+
+  buildAvgSpeedCard(avgSpeed: number, speedList: number[], numAvgSpeedValues): AverageSpeedCard {
+    avgSpeed /= speedList.length;
+    const avgSpeedCard = new AverageSpeedCard();
+    avgSpeedCard.averageSpeed = Math.round(avgSpeed);
+    avgSpeedCard.speedList = speedList;
+    return avgSpeedCard;
+  }
+
+  buildSignalStrengthCard(lowStrength: number, highStrength: number, signalStrengthList: number[]): SignalStrengthCard {
+    const signalStrengthCard = new SignalStrengthCard();
+    signalStrengthCard.low = lowStrength;
+    signalStrengthCard.high = highStrength;
+    signalStrengthCard.strenghtList = signalStrengthList;
+    return signalStrengthCard;
   }
 
 }
